@@ -1,11 +1,13 @@
 import boto3
 
 def lambda_handler(event, context):
+    body = json.loads(event.get('body', '{}'))  # Esto maneja el caso donde no haya un cuerpo válido
+
     # Obtener los datos de la aerolínea desde el cuerpo de la solicitud
-    id_aerolinea = event['id_aerolinea']
-    nombre = event['nombre']
-    codigo = event['codigo']
-    pais_origen = event['pais_origen']
+    id_aerolinea = body.get('id_aerolinea')
+    nombre = body.get('nombre')
+    codigo = body.get('codigo')
+    pais_origen = body.get('pais_origen')
 
     # Conectar con DynamoDB
     dynamodb = boto3.resource('dynamodb')
