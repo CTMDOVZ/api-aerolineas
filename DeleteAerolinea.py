@@ -6,7 +6,7 @@ def delete_aerolinea(event, context):
 
     # Conectar con DynamoDB
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('t_aerolineas')
+    table = dynamodb.Table('t_aerolineass')
 
     # Eliminar el ítem
     response = table.delete_item(
