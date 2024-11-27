@@ -12,7 +12,7 @@ provider:
 
 custom:
   tables:
-    aerolineas: t_aerolineas # Cambié el nombre para evitar caracteres no permitidos
+    aerolineas: t_aerolineass # Cambié el nombre para evitar caracteres no permitidos
 
 resources:
   Resources:
