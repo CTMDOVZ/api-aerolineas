@@ -1,7 +1,7 @@
 import boto3
 
 def search_aerolinea(event, context):
-     body = json.loads(event.get('body', '{}'))
+    body = json.loads(event.get('body', '{}'))
     id_aerolinea = event.get('id_aerolinea')
 
     # Conectar con DynamoDB
