@@ -1,8 +1,8 @@
 import boto3
 
 def delete_aerolinea(event, context):
-    # Obtener el ID de la aerolínea
-    id_aerolinea = event['id_aerolinea']
+    body = json.loads(event.get('body', '{}')) # Obtener el ID de la aerolínea
+    id_aerolinea = event.get('id_aerolinea')
 
     # Conectar con DynamoDB
     dynamodb = boto3.resource('dynamodb')
