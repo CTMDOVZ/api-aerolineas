@@ -17,7 +17,7 @@ def lambda_handler(event, context):
 
         # Conectar con DynamoDB
         dynamodb = boto3.resource('dynamodb')
-        table = dynamodb.Table('Aerolíneas')
+        table = dynamodb.Table('t_aerolineass')
 
         # Crear el item de la aerolínea
         aerolinea = {
