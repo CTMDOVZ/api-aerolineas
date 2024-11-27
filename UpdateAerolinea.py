@@ -1,13 +1,13 @@
 import boto3
 
 def update_aerolinea(event, context):
-    # Obtener el ID de la aerolínea y los atributos a actualizar
-    id_aerolinea = event['id_aerolinea']
-    atributos_actualizar = event['atributos']  # Diccionario con los atributos y valores a actualizar
+    body = json.loads(event.get('body', '{}'))
+    id_aerolinea = event.get('id_aerolinea')
+    atributos_actualizar = event.get('atributos')  # Diccionario con los atributos y valores a actualizar
 
     # Conectar con DynamoDB
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('t_aerolineas')
+    table = dynamodb.Table('t_aerolineass')
 
     # Construir la expresión de actualización
     update_expression = "SET " + ", ".join([f"{k} = :{k}" for k in atributos_actualizar.keys()])
