@@ -1,5 +1,5 @@
 org: mateoespinoza
-service: api-aerolineas
+service: api-aerolinea
 
 provider:
   name: aws
@@ -12,14 +12,14 @@ provider:
 
 custom:
   tables:
-    aerolineas: t_aerolineas
+    aerolineas: t_aerolineas # Cambié el nombre para evitar caracteres no permitidos
 
 resources:
   Resources:
     AerolineasTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.tables.aerolineas}
+        TableName: ${self:custom.tables.aerolineas}  # Asegúrate de que este nombre también esté actualizado
         AttributeDefinitions:
           - AttributeName: id_aerolinea
             AttributeType: S
