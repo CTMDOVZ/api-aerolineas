@@ -1,0 +1,70 @@
+org: mateoespinoza
+service: api-aerolineas
+
+provider:
+  name: aws
+  runtime: python3.10
+  iam:
+    role: arn:aws:iam::399737753482:role/LabRole  # Aquí se asigna el ARN del rol LabRole
+
+  environment:
+    AEROLINEAS_TABLE: ${self:custom.tables.aerolineas}
+
+custom:
+  tables:
+    aerolineas: t_aerolineas
+
+resources:
+  Resources:
+    AerolineasTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tables.aerolineas}
+        AttributeDefinitions:
+          - AttributeName: id_aerolinea
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id_aerolinea
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+functions:
+  create_aerolinea:
+    handler: CrearAerolinea.lambda_handler
+    events:
+      - http:
+          path: /aerolineas
+          method: post
+          cors: true
+
+  delete_aerolinea:
+    handler: DeleteAerolinea.lambda_handler
+    events:
+      - http:
+          path: /aerolineas/{id_aerolinea}
+          method: delete
+          cors: true
+
+  update_aerolinea:
+    handler: UpdateAerolinea.lambda_handler
+    events:
+      - http:
+          path: /aerolineas/{id_aerolinea}
+          method: put
+          cors: true
+
+  search_aerolinea:
+    handler: SearchAerolinea.lambda_handler
+    events:
+      - http:
+          path: /aerolineas/search
+          method: get
+          cors: true
+
+  login_aerolinea:
+    handler: LoginAerolinea.lambda_handler
+    events:
+      - http:
+          path: /aerolineas/login
+          method: post
+          cors: true
